@@ -1,0 +1,23 @@
+{
+  "name": "benchmarks",
+  "version": "1.0.0",
+  "description": "Various benchmarks",
+  "main": "index.js",
+  "dependencies": {
+    "benchmark": "^2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitry-korolev/benchmarks.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmitry-korolev/benchmarks/issues"
+  },
+  "homepage": "https://github.com/dmitry-korolev/benchmarks#readme"
+}

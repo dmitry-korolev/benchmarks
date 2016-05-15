@@ -1,4 +1,5 @@
 var Benchmark = require('benchmark'),
+    expect = require('expect'),
     suite = new Benchmark.Suite,
     string = '01000110 01110010 01101001 01100101 01101110 01100100';
 
@@ -55,3 +56,9 @@ const five = str => {
 
     return r;
 };
+
+expect(one(string)).toBe('Friend');
+expect(two(string)).toBe('Friend');
+expect(three(string)).toBe('Friend');
+expect(four(string)).toBe('Friend');
+expect(five(string)).toBe('Friend');

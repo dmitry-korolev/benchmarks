@@ -16,7 +16,7 @@ suite
     .add('ten: same + memo arr length', () => ten(string))
     .add('eleven: split / forEach', () => eleven(string))
     .on('cycle', event => console.log(String(event.target)))
-    .on('complete', () => console.log('Fastest is ' + this.filter('fastest').map('name')))
+    .on('complete', function() {console.log('Fastest is ' + this.filter('fastest').map('name'))})
     .run({ 'async': true });
 
 

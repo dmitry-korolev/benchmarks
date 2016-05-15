@@ -4,20 +4,23 @@ var Benchmark = require('benchmark'),
     string = '01000110 01110010 01101001 01100101 01101110 01100100';
 
 suite
-    .add('One', function() {
+    .add('Korolev v1', function() {
         one(string);
     })
-    .add('Two', function() {
+    .add('Mulyavka', function() {
         two(string);
     })
-    .add('Three', function() {
+    .add('Korolev v2', function() {
         three(string);
     })
-    .add('Four', function() {
+    .add('Korolev v3', function() {
         four(string);
     })
-    .add('Five', function() {
+    .add('Bokov', function() {
         five(string);
+    })
+    .add('Marchenko', function() {
+        sixty(string);
     })
     .on('cycle', function(event) {
         console.log(String(event.target));
@@ -57,8 +60,17 @@ const five = str => {
     return r;
 };
 
+const sixty = str => {
+  for(var a = str.split(' '), l = a.length, i = 0, t = ''; l > i; i++) {
+    t += String.fromCharCode(parseInt(a[i],2));
+  }
+
+  return t;
+}
+
 expect(one(string)).toBe('Friend');
 expect(two(string)).toBe('Friend');
 expect(three(string)).toBe('Friend');
 expect(four(string)).toBe('Friend');
 expect(five(string)).toBe('Friend');
+expect(sixty(string)).toBe('Friend');

@@ -20,7 +20,22 @@ suite
         five(string);
     })
     .add('Marchenko', function() {
-        sixty(string);
+        six(string);
+    })
+    .add('Korolev v4', function() {
+        seven(string);
+    })
+    .add('Korolev v5', function() {
+        eight(string);
+    })
+    .add('Korolev v5 + t[t.length]', function() {
+        nine(string);
+    })
+    .add('Korolev v5 + memo arr length', function() {
+        ten(string);
+    })
+    .add('Korolev v6', function() {
+        eleven(string);
     })
     .on('cycle', function(event) {
         console.log(String(event.target));
@@ -59,18 +74,60 @@ const five = str => {
 
     return r;
 };
-
-const sixty = str => {
+const six = str => {
   for(var a = str.split(' '), l = a.length, i = 0, t = ''; l > i; i++) {
     t += String.fromCharCode(parseInt(a[i],2));
   }
 
   return t;
-}
+};
+const seven = str => {
+    for(var a = str.split(' '), l = a.length, i = 0, t = []; l > i; i++) {
+        t.push(parseInt(a[i],2));
+    }
+    return String.fromCharCode.apply(String, t);
+};
+const eight = str => {
+    for(var a = str.split(' '), l = a.length, i = 0, t = []; l > i; i++) {
+        t.push(String.fromCharCode(parseInt(a[i],2)));
+    }
+    return t.join('');
+};
+const nine = str => {
+    for(var a = str.split(' '), l = a.length, i = 0, t = []; l > i; i++) {
+        t[t.length] = String.fromCharCode(parseInt(a[i],2));
+    }
+    return t.join('');
+};
+const ten = str => {
+    var a = str.split(' '),
+        l = a.length,
+        t = new Array(l),
+        i = 0;
+
+    for(; l > i; i++) {
+        t[i] = String.fromCharCode(parseInt(a[i],2));
+    }
+    return t.join('');
+};
+const eleven = str => {
+    var t = [];
+
+    str.split(' ').forEach(s => {
+        t.push(String.fromCharCode(parseInt(s,2)));
+    });
+
+    return t.join('');
+};
 
 expect(one(string)).toBe('Friend');
 expect(two(string)).toBe('Friend');
 expect(three(string)).toBe('Friend');
-expect(four(string)).toBe('Friend');
-expect(five(string)).toBe('Friend');
-expect(sixty(string)).toBe('Friend');
+// expect(four(string)).toBe('Friend');
+// expect(five(string)).toBe('Friend');
+expect(six(string)).toBe('Friend');
+expect(seven(string)).toBe('Friend');
+expect(eight(string)).toBe('Friend');
+expect(nine(string)).toBe('Friend');
+expect(ten(string)).toBe('Friend');
+expect(eleven(string)).toBe('Friend');

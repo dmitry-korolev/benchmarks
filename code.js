@@ -4,17 +4,17 @@ var Benchmark = require('benchmark'),
     string = '01000110 01110010 01101001 01100101 01101110 01100100';
 
 suite
-    .add('ES6 spread', () => one(string))
-    .add('Split/map', () => two(string))
-    .add('Apply', () => three(string))
-    .add('do while each bit', () => four(string))
-    .add('do while each byte', () => five(string))
-    .add('split / for / string +=', () => six(string))
-    .add('split / for / arr.push / apply', () => seven(string))
-    .add('split / for / arr.push / join', () => eight(string))
-    .add('same + t[t.length]', () => nine(string))
-    .add('same + memo arr length', () => ten(string))
-    .add('split / forEach', () => eleven(string))
+    .add('one: ES6 spread', () => one(string))
+    .add('two: Split/map', () => two(string))
+    .add('three: Apply', () => three(string))
+    .add('four: do while each bit', () => four(string))
+    .add('five: do while each byte', () => five(string))
+    .add('six: split / for / string +=', () => six(string))
+    .add('seven: split / for / arr.push / apply', () => seven(string))
+    .add('eight: split / for / arr.push / join', () => eight(string))
+    .add('nine: same + t[t.length]', () => nine(string))
+    .add('ten: same + memo arr length', () => ten(string))
+    .add('eleven: split / forEach', () => eleven(string))
     .on('cycle', event => console.log(String(event.target)))
     .on('complete', () => console.log('Fastest is ' + this.filter('fastest').map('name')))
     .run({ 'async': true });

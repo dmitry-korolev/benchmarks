@@ -4,37 +4,37 @@ var Benchmark = require('benchmark'),
     string = '01000110 01110010 01101001 01100101 01101110 01100100';
 
 suite
-    .add('Korolev v1', function() {
+    .add('ES6 spread', function() {
         one(string);
     })
-    .add('Mulyavka', function() {
+    .add('Split/map', function() {
         two(string);
     })
-    .add('Korolev v2', function() {
+    .add('Apply', function() {
         three(string);
     })
-    .add('Korolev v3', function() {
+    .add('do while each bit', function() {
         four(string);
     })
-    .add('Bokov', function() {
+    .add('do while each byte', function() {
         five(string);
     })
-    .add('Marchenko', function() {
+    .add('split / for / string +=', function() {
         six(string);
     })
-    .add('Korolev v4', function() {
+    .add('split / for / arr.push / apply', function() {
         seven(string);
     })
-    .add('Korolev v5', function() {
+    .add('split / for / arr.push / join', function() {
         eight(string);
     })
-    .add('Korolev v5 + t[t.length]', function() {
+    .add('same + t[t.length]', function() {
         nine(string);
     })
-    .add('Korolev v5 + memo arr length', function() {
+    .add('same + memo arr length', function() {
         ten(string);
     })
-    .add('Korolev v6', function() {
+    .add('split / forEach', function() {
         eleven(string);
     })
     .on('cycle', function(event) {

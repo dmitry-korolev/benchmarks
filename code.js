@@ -4,45 +4,19 @@ var Benchmark = require('benchmark'),
     string = '01000110 01110010 01101001 01100101 01101110 01100100';
 
 suite
-    .add('ES6 spread', function() {
-        one(string);
-    })
-    .add('Split/map', function() {
-        two(string);
-    })
-    .add('Apply', function() {
-        three(string);
-    })
-    .add('do while each bit', function() {
-        four(string);
-    })
-    .add('do while each byte', function() {
-        five(string);
-    })
-    .add('split / for / string +=', function() {
-        six(string);
-    })
-    .add('split / for / arr.push / apply', function() {
-        seven(string);
-    })
-    .add('split / for / arr.push / join', function() {
-        eight(string);
-    })
-    .add('same + t[t.length]', function() {
-        nine(string);
-    })
-    .add('same + memo arr length', function() {
-        ten(string);
-    })
-    .add('split / forEach', function() {
-        eleven(string);
-    })
-    .on('cycle', function(event) {
-        console.log(String(event.target));
-    })
-    .on('complete', function() {
-        console.log('Fastest is ' + this.filter('fastest').map('name'));
-    })
+    .add('ES6 spread', () => one(string))
+    .add('Split/map', () => two(string))
+    .add('Apply', () => three(string))
+    .add('do while each bit', () => four(string))
+    .add('do while each byte', () => five(string))
+    .add('split / for / string +=', () => six(string))
+    .add('split / for / arr.push / apply', () => seven(string))
+    .add('split / for / arr.push / join', () => eight(string))
+    .add('same + t[t.length]', () => nine(string))
+    .add('same + memo arr length', () => ten(string))
+    .add('split / forEach', () => eleven(string))
+    .on('cycle', event => console.log(String(event.target)))
+    .on('complete', () => console.log('Fastest is ' + this.filter('fastest').map('name')))
     .run({ 'async': true });
 
 

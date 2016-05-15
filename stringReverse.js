@@ -1,18 +1,24 @@
 var Benchmark = require('benchmark'),
-	suite = new Benchmark.Suite,
-	string = randString(parseInt(process.argv[2]));
+    suite = new Benchmark.Suite,
+    string = randString(parseInt(process.argv[2]));
 
 suite.add('O(n), string', function() {
-	reverse1(string);
+    reverse1(string);
 })
 .add('O(n), array', function() {
-	reverse1_imp(string);
+    reverse1_imp(string);
 })
 .add('O(n / 2), array', function() {
-	reverse2(string);
+    reverse2(string);
 })
 .add('O(x), native array', function() {
-	reverse3(string);
+    reverse3(string);
+})
+.add('O(n), recursion', function() {
+    reverse3(string);
+})
+.add('arr.reduceRight', function() {
+    reverse3(string);
 })
 .on('cycle', function(event) {
   console.log(String(event.target));
@@ -23,37 +29,50 @@ suite.add('O(n), string', function() {
 .run({ 'async': true });
 
 function reverse1(string) {
-	var newString = '';
+    var newString = '';
 
-	for (var i = 1; i <= string.length; i++) {
-		newString += string[string.length - i];
-	}
-	return newString;
+    for (var i = 1; i <= string.length; i++) {
+    newString += string[string.length - i];
+    }
+    return newString;
 }
 
 function reverse1_imp(string) {
-	var newString = [];
+    var newString = [];
 
-	for (var i = 1; i <= string.length; i++) {
-		newString.push(string[string.length - i]);
-	}
-	return newString.join('');
+    for (var i = 1; i <= string.length; i++) {
+        newString.push(string[string.length - i]);
+    }
+    return newString.join('');
 }
 
 function reverse2(string) {
-	var arr= string.split(''),
-		l = arr.length - 1,
-		tmp;
-	for (var i = 0; i < Math.ceil(l / 2); i++) {
-		tmp = arr[i];
-		arr[i] = arr[l - i];
-		arr[l - i] = tmp;
-	}
-	return arr.join('');
+    var arr = new Array(string.length),
+        middle = Math.ceil(string.length / 2);
+
+    for (var x = 0, y = string.length - 1; x <= middle; x++, y--) {
+        arr[x] = string[y];
+        arr[y] = string[x];
+    }
+
+    return arr.join('');
 }
 
 function reverse3(string) {
-	return string.split('').reverse().join('');
+    return string.split('').reverse().join('');
+}
+
+function reverse4(str) {
+  if (str === "")
+    return "";
+  else
+    return reverse4(str.substr(1)) + str.charAt(0);
+}
+
+function reverse5(str) {
+    return [].reduceRight.call(str, function(acc, i) {
+    return acc + i;
+    }, '');
 }
 
 function randString(x){

@@ -32,14 +32,16 @@ const two = str => str.split(' ').map(s => String.fromCharCode(parseInt(s,2))).j
 const three = str => String.fromCharCode.apply( String, str.split(' ').map(s => parseInt(s, 2)) );
 const four = str => {
     var i = 0, tmp = '', newStr = '';
+    str += ' ';
 
     do {
         tmp += str[i];
         i += 1;
         if (tmp.length % 9 === 0) {
             newStr += String.fromCharCode(parseInt(tmp, 2));
+            tmp = '';
         }
-    } while (i <= newStr.length);
+    } while (i <= str.length);
 
     return newStr;
 };

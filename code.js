@@ -1,7 +1,12 @@
 var Benchmark = require('benchmark'),
     expect = require('expect'),
     suite = new Benchmark.Suite,
-    string = '01000110 01110010 01101001 01100101 01101110 01100100';
+    string = '01000110 01110010 01101001 01100101 01101110 01100100',
+    binToCharMap = {};
+
+for (let i = 0; i < 256; i++) {
+    binToCharMap[('00000000' + i.toString(2)).substr(-8)] = String.fromCharCode(i);
+}
 
 suite
     .add('one: ES6 spread', () => one(string))
@@ -15,6 +20,7 @@ suite
     .add('nine: same + t[t.length]', () => nine(string))
     .add('ten: same + memo arr length', () => ten(string))
     .add('eleven: split / forEach', () => eleven(string))
+    .add('twelve: hashmap', () => twelve(string))
     .on('cycle', event => console.log(String(event.target)))
     .on('complete', function() {console.log('Fastest is ' + this.filter('fastest').map('name'))})
     .run({ 'async': true });
@@ -93,6 +99,12 @@ const eleven = str => {
 
     return t.join('');
 };
+const twelve = str => {
+    for(var a = str.split(' '), l = a.length, i = 0, t = ''; l > i; i++) {
+        t += binToCharMap[a[i]];
+    }
+    return t;
+};
 
 expect(one(string)).toBe('Friend');
 expect(two(string)).toBe('Friend');
@@ -105,3 +117,4 @@ expect(eight(string)).toBe('Friend');
 expect(nine(string)).toBe('Friend');
 expect(ten(string)).toBe('Friend');
 expect(eleven(string)).toBe('Friend');
+expect(twelve(string)).toBe('Friend');
